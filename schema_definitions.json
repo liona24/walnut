@@ -1,0 +1,58 @@
+{
+    "tick": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "Tick",
+        "description": "A tick event of an asset",
+        "type": "object",
+        "properties": {
+            "timestamp": {
+                "description": "The timestamp the event occured. If not given will be stamped upon arrival.",
+                "type": "string",
+                "format": "date-time"
+            },
+            "price": {
+                "description": "The new price",
+                "type": "number"
+            },
+            "symbol": {
+                "description": "The financial asset",
+                "type": "string",
+                "pattern": "^[A-Z0-9]{3,4}($|/[A-Z0-9]{3,4}$)"
+            }
+        },
+        "required": [ "symbol", "price" ]
+    },
+    "order": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "Order",
+        "description": "An order to be performed",
+        "type": "object",
+        "properties": {
+            "timestamp": {
+                "description": "The timestamp the order was issued",
+                "type": "string",
+                "format": "date-time"
+            },
+            "invalidAt": {
+                "description": "(Optional) Timestamp to invalidate the order at, if the trade was not issued before",
+                "type": "string",
+                "format": "date-time"
+            },
+            "type": {
+                "description": "The order type. Either 'short', 'long' or 'close'",
+                "type": "string",
+                "pattern": "^(short|long|close)$"
+            },
+            "stoploss": {
+                "description": "The stoploss to be set for the given order",
+                "type": "number"
+            },
+            "symbol": {
+                "description": "The financial asset",
+                "type": "string",
+                "pattern": "^[A-Z0-9]{3,4}($|/[A-Z0-9]{3,4}$)"
+            }
+        },
+        "required": [ "timestamp", "type", "symbol" ]
+    }
+}
