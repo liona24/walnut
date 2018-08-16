@@ -34,7 +34,7 @@ class Engine(object):
         :horizon: - The time horizon to store tick data for. This has to be
             either a `datetime.timedelta` or a dictionary containing the kvargs
             to initialize one.
-        :new_trader: - A callable (new_trader(symbol: str) -> BaseTrader)
+        :new_trader: - A callable (symbol: str, storage: Storage) -> BaseTrader
             which returns a new trader for the given symbol
         """
         self.traders = {}
@@ -98,7 +98,7 @@ class Engine(object):
             if symbol in self.traders:
                 raise ValueError('Trader for the specified symbol (%s) already running' % symbol)  # noqa E501
 
-            trader = self.new_trader(symbol)
+            trader = self.new_trader(symbol, self.storage)
             self.traders[symbol] = trader
             trader.run()
 
@@ -136,6 +136,6 @@ class TestEngine(Engine):
                     # note that this is kinda hacky:
                     # we abuse the fact that the eval interval is not used
                     # outside of the running mode
-                    traders[symbol] = self.new_trader(symbol)
+                    traders[symbol] = self.new_trader(symbol, self.storage)
 
                 traders[symbol].force_eval()
