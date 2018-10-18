@@ -55,7 +55,7 @@ class BaseTrader(object):
 
     def run(self):
         self._stop_event.clear()
-        self.thread.run()
+        self.thread.start()
 
     def request_end(self):
         self._stop_event.set()
