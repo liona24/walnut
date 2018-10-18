@@ -53,7 +53,7 @@ class BaseTrader(object):
 
             sleep(self.eval_interval)
 
-    def run(self):
+    def start(self):
         self._stop_event.clear()
         self.thread.start()
 

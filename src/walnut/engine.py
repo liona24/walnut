@@ -100,7 +100,7 @@ class Engine(object):
 
             trader = self.new_trader(symbol, self.storage)
             self.traders[symbol] = trader
-            trader.run()
+            trader.start()
 
 
 class TestEngine(Engine):
