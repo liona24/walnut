@@ -17,6 +17,12 @@ setuptools.setup(
     packages=['walnut'],
     package_dir={ '': 'src' },
     package_data={ 'walnut': ['schema_definitions.json'] },
+    install_requires=[
+        'numpy',
+        'pandas',
+        'jsonschema',
+        'python-dateutil'
+    ],
     license='MIT',
     classifiers=[
         'Programming Language :: Python :: 3'
